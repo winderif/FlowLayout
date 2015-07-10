@@ -19,11 +19,13 @@ package com.wefika.flowlayout;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.database.DataSetObserver;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +40,9 @@ import java.util.List;
  */
 @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
 public class FlowLayout extends ViewGroup {
+
+	private ListAdapter adapter;
+	private DataSetObserver dataSetObserver;
 
 	private int mGravity = (isIcs() ? Gravity.START : Gravity.LEFT) | Gravity.TOP;
 
@@ -370,6 +375,51 @@ public class FlowLayout extends ViewGroup {
     private static boolean isIcs() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH;
     }
+
+	public ListAdapter getAdapter() {
+		return adapter;
+	}
+
+	public void setAdapter(ListAdapter adapter) {
+		if(adapter == null) {
+			return ;
+		}
+
+		if(dataSetObserver == null) {
+			dataSetObserver = new AdapterObserver();
+		}
+
+		if(this.adapter != null) {
+			this.adapter.unregisterDataSetObserver(dataSetObserver);
+		}
+
+		if(adapter != null) {
+			this.adapter = adapter;
+			this.adapter.registerDataSetObserver(dataSetObserver);
+			removeAllViews();
+			setViewFromAdapter();
+		}
+	}
+
+	private void setViewFromAdapter() {
+		for(int i=0; i<adapter.getCount(); i++) {
+			final View view = adapter.getView(i, null, this);
+			addView(view);
+		}
+	}
+
+	public class AdapterObserver extends DataSetObserver {
+		@Override
+		public void onChanged() {
+			removeAllViews();
+			setViewFromAdapter();
+		}
+
+		@Override
+		public void onInvalidated() {
+
+		}
+	}
 
 	public static class LayoutParams extends MarginLayoutParams {
 
