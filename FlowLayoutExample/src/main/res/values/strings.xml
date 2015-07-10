@@ -23,5 +23,10 @@
     <string name="activity_all_in_one">All in one example</string>
     <string name="activity_visibility">Visibility</string>
     <string name="activity_scroll">ScrollView</string>
+    <string name="activity_adapter">Adapter</string>
+    <string name="title_activity_adapter">AdapterActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

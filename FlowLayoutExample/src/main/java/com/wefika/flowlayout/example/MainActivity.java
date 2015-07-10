@@ -53,7 +53,8 @@ public class MainActivity extends ListActivity {
                 new Item<>(R.string.activity_basic, BasicActivity.class),
                 new Item<>(R.string.activity_all_in_one, AllInOneActivity.class),
                 new Item<>(R.string.activity_visibility, VisibilityActivity.class),
-                new Item<>(R.string.activity_scroll, ScrollActivity.class)
+                new Item<>(R.string.activity_scroll, ScrollActivity.class),
+                new Item<>(R.string.activity_adapter, AdapterActivity.class)
         };
 
         private LayoutInflater mInflater;
