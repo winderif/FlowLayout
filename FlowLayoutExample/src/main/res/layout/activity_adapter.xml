@@ -1,8 +1,41 @@
-<com.wefika.flowlayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/flowlayout"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:gravity="start|top"
-    android:padding="10dp">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-</com.wefika.flowlayout.FlowLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons">
+
+        <com.wefika.flowlayout.FlowLayout
+            android:id="@+id/flowlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start|top"/>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:onClick="onAddTag"
+            android:text="Add"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:onClick="onDelTag"
+            android:text="Delete"/>
+    </LinearLayout>
+</RelativeLayout>
